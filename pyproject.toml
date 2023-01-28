@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "package_name"
+version = "0.1.0"
+description = "Template for Azure function App project"
+authors = ["Thomas Sørensen <thom199b@gmail.com>"]
+readme = "README.md"
+packages = [{include = "package_name"}]
+
+[tool.poetry.dependencies]
+python = "3.8.10"
+azure-functions = "^1.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
