@@ -23,3 +23,6 @@ For more info see [link](https://kyleparrish.com/blog/powershell-script-config-f
 The .gitignore file contains some specific ignores at the bottom added for convenience when testing the template. For instance is the folder name "HelloWorld" ignored to allow for placing the function project in such a folder without comitting set folder to this template.
 
 Furhter it is worth noting that this template is setup specifically for the V2 Programming model, which is still in preview.
+
+### Common issues
+Some issues that have been encountered were solved by uninstalling and reinstalling both the ".Net 6 SDK" and the "Azure Functions Core Tools".
