@@ -1,5 +1,5 @@
 # Devloping Azure Functions locally
-This repo represents a template to set up local development for Azure function. The setup follows [this](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=python) and [this](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-local) MS documentation.
+This repo represents a template to set up local Python development for Azure function. The setup follows [this](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=python) and [this](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-local) MS documentation.
 
 ## Setup
 The local environment is set up automatically by running the Powershell script [env_setup](/utils/env_setup.ps1). Note that at the moment the script only works for windows machines with pyenv and poetry installed. If the module `AzureFunctionsCoreTools` is not already installed on the machine, the installation might take some time.
@@ -18,4 +18,6 @@ Note that the deployment file uses values from a file named "secrets.conf", whic
 For more info see [link](https://kyleparrish.com/blog/powershell-script-config-file/).
 
 ## General notes
-The .gitignore file contains some specific ignores at the bottom added for convenience when testing the template. For instance is the folder name "HelloWorld" ignored to allow for placing the function project in such a folder without comitting set folder to this template
+The .gitignore file contains some specific ignores at the bottom added for convenience when testing the template. For instance is the folder name "HelloWorld" ignored to allow for placing the function project in such a folder without comitting set folder to this template.
+
+Furhter it is worth noting that this template is setup specifically for the V2 Programming model, which is still in preview.
