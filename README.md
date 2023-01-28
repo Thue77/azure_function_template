@@ -11,11 +11,7 @@ An internet connection is necessary for setting up the environment!
 ## Infrastructure
 The infrastructure is defined in [infrastructure](/infrastructure/) and deployed via [deploy_infra](/infrastructure/deploy_infra.ps1). The infrastructure includes an ADF and a KeyVault to make it self contained, but for actual projects, the structure should be different as the Keyvault should be shared be resources in the same environment and the same principle could go fro ADF if used as an orchestrator. Additionally, the infrastructure is only ment for small development and poc projects, as no special security measures have been taken
 
-Note that the deployment file uses values from a file named "secrets.conf", which is not included in the repo. The format of the file is simply as follows:
-
-`Variable1Name=Variable1Value`
-
-`Variable2Name=Variable2Value`
+Note that the deployment file uses values from a file named "secrets.conf", which is not included in the repo. For convenience a template file with the correct variables assigned to dummy values has been added.
 
 For more info see [link](https://kyleparrish.com/blog/powershell-script-config-file/).
 
