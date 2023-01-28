@@ -2,7 +2,9 @@
 This repo represents a template to set up local Python development for Azure function. The setup follows [this](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=python) and [this](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-local) MS documentation.
 
 ## Setup
-The local environment is set up automatically by running the Powershell script [env_setup](/utils/env_setup.ps1). Note that at the moment the script only works for windows machines with pyenv and poetry installed. If the module `AzureFunctionsCoreTools` is not already installed on the machine, the installation might take some time. For local debugging is is necessary to add the extensions [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) and [Azurite](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite).
+The local environment is set up automatically by running the Powershell script [env_setup](/utils/env_setup.ps1). Note that at the moment the script only works for windows machines with pyenv and poetry installed. If the module `AzureFunctionsCoreTools` is not already installed on the machine, the installation might take some time. For deploying the Azure Function, refer to [deploy_func](/utils/deploy_func.ps1).
+
+For local debugging is is necessary to add the extensions [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) and [Azurite](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite).
 
 An internet connection is necessary for setting up the environment!
 
