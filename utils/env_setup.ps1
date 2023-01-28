@@ -1,5 +1,9 @@
-param ($template)
+param ($folderName, $template)
 
+try {
+if (-not($folderName)) {
+    throw 'No folder name is given. Please give a foldername'
+}
 
 try {
     func --version
@@ -34,16 +38,23 @@ Write-Host 'Configure poetry'
 poetry config virtualenvs.prefer-active-python true
 poetry config virtualenvs.in-project true
 Write-Host 'Update pip and install virtual environment'
-poetry run pip install --upgrade pip
+mkdir $folderName
+Copy-Item .\pyproject.toml $folderName
+Set-Location $folderName
 poetry install
-poetry add azure-functions
+poetry run pip install --upgrade pip
 .\.venv\Scripts\activate
 Write-Host 'Initialize project for Azure function'
 if ($template) {
     Write-Host 'Project started based on template' $template
-    func new --name HelloWorld --worker-runtime python -m V2 --template $template
+    func new --name $folderName --worker-runtime python -m V2 --template $template
 }
 else {
     Write-Host 'Empty function project is initiated. If you wish to use a template instead then try with HTTP Trigger '
-    func init HelloWorld --worker-runtime python -m V2
+    func init --name $folderName --worker-runtime python -m V2
+}
+
+}
+catch {
+    throw $_
 }

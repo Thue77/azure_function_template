@@ -1,4 +1,6 @@
-param ($shortLoaction, $environment)
+param ($shortLoaction, $environment, $folderName)
+try {
+    
 
 if ($shortLoaction -and $environment) {
     Write-Host 'location: ' $shortLoaction
@@ -24,4 +26,13 @@ Set-AzDefault -ResourceGroupName $ResourceGroupName
 
 $funcName = 'func-'+$projectName+ '-' + $shortLoaction + '-' + $environment+'-001'
 
+$path = '.\' + $folderName
+
+Set-Location $path
+
 func azure functionapp publish $funcName
+
+}
+catch {
+    throw $_
+}
