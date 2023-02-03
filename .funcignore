@@ -1,0 +1,10 @@
+.vscode/
+__azurite*
+__blob*
+pyproject*
+poetry*
+.venv/
+.gitignore
+local*
+.funcignore
+tests/
