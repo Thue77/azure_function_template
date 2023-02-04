@@ -130,5 +130,5 @@ dmypy.json
 
 
 # Template specific
-secret*
+secrets.conf
 HelloWorld
