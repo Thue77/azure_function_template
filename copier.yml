@@ -30,6 +30,10 @@ azureADObjectID:
     type: str
     help: What is your user id in AAD. You can find this by looking up the user in the portal?
 
-pythonVersion:
+pythonMinorVersion:
     type: str
-    help: What python version do you want to use?
+    help: What python version do you want to use in for the form 3.x?
+
+pythonMicroVersion:
+    type: str
+    help: What python version do you want to use in for the form 3.x.y?
