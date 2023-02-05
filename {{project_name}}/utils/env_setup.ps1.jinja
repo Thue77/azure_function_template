@@ -12,6 +12,15 @@ catch {
     Write-Host 'INFO::Azure functions core tools not installed. Starting installation...'
     winget install Microsoft.AzureFunctionsCoreTools
 }
+Write-Host 'INFO::Check if Azurite is installed'
+try {
+    azurite --version
+}
+catch {
+    Write-Host 'INFO::Azurite is not installed. Installing with npm'
+    npm install -g azurite
+}
+
 Write-Host 'checking version of pyenv'
 try {
     pyenv --version
@@ -31,6 +40,7 @@ pyenv global $pythonVersion
 Write-Host 'INFO::Update pip and create virtual environment'
 mkdir $folderName
 Copy-Item .\pyproject.toml $folderName
+Copy-Item .\execute_func.ps1 $folderName
 Set-Location $folderName
 python -m venv .venv
 .\.venv\Scripts\activate
@@ -46,11 +56,11 @@ pip-sync dev-requirements.txt
 Write-Host 'INFO::Initialize project for Azure function'
 if ($template) {
     Write-Host 'INFO::Project started based on template' $template
-    func new --name $folderName --worker-runtime python -m V2 --template $template
+    func new --name $folderName --worker-runtime python -m V{{pythonProgrammingModel}} --template $template
 }
 else {
     Write-Host 'INFO::Empty function project is initiated. If you wish to use a template instead then try with HTTP Trigger '
-    func init --name $folderName --worker-runtime python -m V2
+    func init --name $folderName --worker-runtime python -m V{{pythonProgrammingModel}}
 }
 
 }

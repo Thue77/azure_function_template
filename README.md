@@ -22,6 +22,7 @@ An internet connection is necessary for setting up the environment!
 * It is possible to connect to the local storage emulator via [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/storage/common/storage-explorer-emulators).
 * The [default connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=visual-studio) for Azurite should be set in the variable, "AzureWebJobsStorage" in [local.settings](../blob_reader/local.settings.json). Then the local execution will use the storage emulator. During deployment of the infrastructure the correct connection string to the storage account is already set in the function app setings. 
 * Access app settings in Python using `os.environ['AzureWebJobsStorage']`.
+* The Powershell script [execute_func](./%7B%7Bproject_name%7D%7D/execute_func.ps1.jinja) is included to start Azurite and Azure Function locally with a single command
 
 ## Local Azure function
 
