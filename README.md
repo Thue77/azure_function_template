@@ -10,24 +10,32 @@ This templates utilizes the CLI tool, [copier](https://pypi.org/project/copier/)
 
 The local environment is set up automatically by running the Powershell script [env_setup](/utils/env_setup.ps1). The project management is done using [pip-tools](https://pypi.org/project/pip-tools/), which means that the requirements files should be generated automatically via `pip-compile` using the specification in [pyproject](pyproject.toml).
 
- Note that at the moment the script only works for Windows machines and it will install `pyenv` by default. If the module `AzureFunctionsCoreTools` is not already installed on the machine, the installation might take some time.
+ Note that at the moment the script, [env_setup](/utils/env_setup.ps1), only works for Windows machines because it installs [pyenv](https://github.com/pyenv/pyenv) for Windows and [AzureFunctionsCoreTools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) using `winget`. If these are already installed on the system, then the installation is skipped. If the module `AzureFunctionsCoreTools` is not already installed on the machine, the installation might take some time.
 
-For local debugging in VS Code it is necessary to add the extensions [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) and [Azurite](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite).
+ The following are installed if the do not already exist:
 
-An internet connection is necessary for setting up the environment!
+ * [AzureFunctionsCoreTools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) with winget.
+ * [pyenv](https://github.com/pyenv/pyenv) from source.
+ * [Azurite](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=visual-studio) with `npm`.
 
 
-## Azurite
+## Local execution
+### Azurite
 * To start Azurite run `azurite --silent --location c:\azurite --debug c:\azurite\debug.log`. To use another location simply change "c:\azurite"
 * It is possible to connect to the local storage emulator via [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/storage/common/storage-explorer-emulators).
 * The [default connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=visual-studio) for Azurite should be set in the variable, "AzureWebJobsStorage" in [local.settings](../blob_reader/local.settings.json). Then the local execution will use the storage emulator. During deployment of the infrastructure the correct connection string to the storage account is already set in the function app setings. 
 * Access app settings in Python using `os.environ['AzureWebJobsStorage']`.
-* The Powershell script [execute_func](./%7B%7Bproject_name%7D%7D/execute_func.ps1.jinja) is included to start Azurite and Azure Function locally with a single command
 
-## Local Azure function
+### Local Azure function
 
 * To start function run `func start`
 * To deploy function run `func azure functionapp publish <app_name>`
+
+### Script for local execution
+The Powershell script [execute_func](./%7B%7Bproject_name%7D%7D/execute_func.ps1.jinja) is included to start Azurite and Azure Function locally with a single command
+
+
+For local debugging it is possible to use VS Code by installing the extensions [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) and [Azurite](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite). Everything in the project works by default without the VS Code extensions.
 
 ## Infrastructure
 The infrastructure is defined with bicep code in [infrastructure](/infrastructure/) and deployed via [deploy_infra](/infrastructure/deploy_infra.ps1). The infrastructure includes an ADF and a KeyVault to make it self contained, but for actual projects, the structure should be different as the Keyvault should be shared be resources in the same environment and the same principle could go fro ADF if used as an orchestrator. Additionally, the infrastructure is only ment for small development and poc projects, as no special security measures have been taken.
@@ -40,7 +48,7 @@ For more info on the format of the resulting "secrets.conf" file and how Powersh
 
 
 ## General notes
-This template is setup specifically for the V2 Programming model, which is still in preview. Simply alter the code in [env_setup](./utils/env_setup.ps1.jinja) to change this behaviour.
+This template is setup to work for both programming model V1 and V2, but it is worht noting that some of the templates are not available in V2, which is also still in preview.
 
 ### Common issues
 * Some issues that have been encountered were solved by uninstalling and reinstalling both the ".Net 6 SDK" and the "Azure Functions Core Tools".
