@@ -240,7 +240,7 @@ resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
       ftpsState: 'FtpsOnly'
       minTlsVersion: '1.2'
       remoteDebuggingEnabled:true
-      linuxFxVersion: 'python|3.8'
+      linuxFxVersion: 'python|{{pythonMinorVersion}}'
     }
     httpsOnly: true
   }
