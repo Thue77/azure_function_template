@@ -37,3 +37,8 @@ pythonMinorVersion:
 pythonMicroVersion:
     type: str
     help: What python version do you want to use in for the form 3.x.y?
+
+pythonProgrammingModel:
+    type: str
+    help: What python programming model to use. Choose between 1 and 2. 2 is still in preview?
+
