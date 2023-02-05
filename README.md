@@ -27,4 +27,5 @@ For more info on the format of the resulting "secrets.conf" file and how Powersh
 This template is setup specifically for the V2 Programming model, which is still in preview. Simply alter the code in [env_setup](./utils/env_setup.ps1.jinja) to change this behaviour.
 
 ### Common issues
-Some issues that have been encountered were solved by uninstalling and reinstalling both the ".Net 6 SDK" and the "Azure Functions Core Tools".
+* Some issues that have been encountered were solved by uninstalling and reinstalling both the ".Net 6 SDK" and the "Azure Functions Core Tools".
+* Sometimes when using `pip-compile` an unhandled error might be thrown from the back-end when building the wheel. To get a proper error message, try to run `python -m build --wheel .` where the folder contains the toml file but not requirements files. 
