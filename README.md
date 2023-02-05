@@ -16,12 +16,27 @@ For local debugging in VS Code it is necessary to add the extensions [Azure Func
 
 An internet connection is necessary for setting up the environment!
 
+
+## Azurite
+* To start Azurite run `azurite --silent --location c:\azurite --debug c:\azurite\debug.log`. To use another location simply change "c:\azurite"
+* It is possible to connect to the local storage emulator via [Azure Storage Explorer](https://learn.microsoft.com/en-us/azure/storage/common/storage-explorer-emulators).
+* The [default connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=visual-studio) for Azurite should be set in the variable, "AzureWebJobsStorage" in [local.settings](../blob_reader/local.settings.json). Then the local execution will use the storage emulator. During deployment of the infrastructure the correct connection string to the storage account is already set in the function app setings. 
+* Access app settings in Python using `os.environ['AzureWebJobsStorage']`.
+
+## Local Azure function
+
+* To start function run `func start`
+* To deploy function run `func azure functionapp publish <app_name>`
+
 ## Infrastructure
 The infrastructure is defined with bicep code in [infrastructure](/infrastructure/) and deployed via [deploy_infra](/infrastructure/deploy_infra.ps1). The infrastructure includes an ADF and a KeyVault to make it self contained, but for actual projects, the structure should be different as the Keyvault should be shared be resources in the same environment and the same principle could go fro ADF if used as an orchestrator. Additionally, the infrastructure is only ment for small development and poc projects, as no special security measures have been taken.
 
 Note that the deployment file uses values from a file named "secrets.conf", which is represented by a jinja template. The secrets are filled in by the copier command that renders the project template. 
 
 For more info on the format of the resulting "secrets.conf" file and how Powershell reads it, see [link](https://kyleparrish.com/blog/powershell-script-config-file/).
+
+
+
 
 ## General notes
 This template is setup specifically for the V2 Programming model, which is still in preview. Simply alter the code in [env_setup](./utils/env_setup.ps1.jinja) to change this behaviour.
