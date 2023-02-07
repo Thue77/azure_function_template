@@ -96,11 +96,11 @@ resource sbdcRoleDefinitionResourceId 'Microsoft.Authorization/roleDefinitions@2
   name: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
 }
 
-@description('This is the built-in Databricks Contributor role')
-resource dbsRoleDefinitionResourceId 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
-  scope: subscription()
-  name: 'b24988ac-6180-42a0-ab88-20f7382dd24c'
-}
+// @description('This is the built-in Databricks Contributor role')
+// resource dbsRoleDefinitionResourceId 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
+//   scope: subscription()
+//   name: 'b24988ac-6180-42a0-ab88-20f7382dd24c'
+// }
 
 
 // Storage account
@@ -155,7 +155,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storageAccount
   name: guid(storageAccount.id, dataFactory.id, sbdcRoleDefinitionResourceId.id)
   properties: {
-    roleDefinitionId: dbsRoleDefinitionResourceId.id
+    roleDefinitionId: sbdcRoleDefinitionResourceId.id
     principalId: dataFactory.identity.principalId
     principalType: 'ServicePrincipal'
   }
