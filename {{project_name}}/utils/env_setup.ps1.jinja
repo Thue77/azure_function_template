@@ -37,13 +37,13 @@ Write-Host "INFO::Installing python $pythonVersion with pyenv"
 pyenv install $pythonVersion
 Write-Host "INFO::Activate python $pythonVersion with pyenv"
 pyenv global $pythonVersion
-Write-Host 'INFO::Update pip and create virtual environment'
+Write-Host "INFO::Update pip and create virtual environment"
 python -m venv .venv
 .\.venv\Scripts\activate
 python -m pip install --upgrade pip
-Write-Host 'INFO::Install pip-tools'
+Write-Host "INFO::Install pip-tools"
 pip install pip-tools
-Write-Host 'INFO::Change folder'
+Write-Host "INFO::Change folder"
 Set-Location src
 Write-Host 'INFO::Compile requirements.txt'
 pip-compile --generate-hashes --output-file=requirements.txt --resolver=backtracking pyproject.toml
