@@ -8,9 +8,9 @@ This templates utilizes the CLI tool, [copier](https://pypi.org/project/copier/)
 
 
 
-The local environment is set up automatically by running the Powershell script [env_setup](/utils/env_setup.ps1). The project management is done using [pip-tools](https://pypi.org/project/pip-tools/), which means that the requirements files should be generated automatically via `pip-compile` using the specification in [pyproject](pyproject.toml).
+The local environment is set up automatically by running the Powershell script [env_setup](/utils/env_setup.ps1). The project management is done using [pip-tools](https://pypi.org/project/pip-tools/), which means that the requirements files should be generated automatically via `pip-compile` using the specification in [pyproject](./%7B%7Bproject_name%7D%7D/pyproject.toml).
 
- Note that at the moment the script, [env_setup](/utils/env_setup.ps1), only works for Windows machines because it installs [pyenv](https://github.com/pyenv/pyenv) for Windows and [AzureFunctionsCoreTools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) using `winget`. If these are already installed on the system, then the installation is skipped. If the module `AzureFunctionsCoreTools` is not already installed on the machine, the installation might take some time.
+ Note that at the moment the script, [env_setup](./%7B%7Bproject_name%7D%7D/utils/env_setup.ps1.jinja), only works for Windows machines because it installs [pyenv](https://github.com/pyenv/pyenv) for Windows and [AzureFunctionsCoreTools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) using `winget`. If these are already installed on the system, then the installation is skipped. If the module `AzureFunctionsCoreTools` is not already installed on the machine, the installation might take some time.
 
  The following are installed if the do not already exist:
 
@@ -38,7 +38,7 @@ The Powershell script [execute_func](./%7B%7Bproject_name%7D%7D/execute_func.ps1
 For local debugging it is possible to use VS Code by installing the extensions [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) and [Azurite](https://marketplace.visualstudio.com/items?itemName=Azurite.azurite). Everything in the project works by default without the VS Code extensions.
 
 ## Infrastructure
-The infrastructure is defined with bicep code in [infrastructure](/infrastructure/) and deployed via [deploy_infra](/infrastructure/deploy_infra.ps1). The infrastructure includes an ADF and a KeyVault to make it self contained, but for actual projects, the structure should be different as the Keyvault should be shared be resources in the same environment and the same principle could go fro ADF if used as an orchestrator. Additionally, the infrastructure is only ment for small development and poc projects, as no special security measures have been taken.
+The infrastructure is defined with bicep code in [infrastructure](./%7B%7Bproject_name%7D%7D/infrastructure/) and deployed via [deploy_infra](./%7B%7Bproject_name%7D%7D/infrastructure/deploy_infra.ps1). The infrastructure includes an ADF and a KeyVault to make it self contained, but for actual projects, the structure should be different as the Keyvault should be shared be resources in the same environment and the same principle could go fro ADF if used as an orchestrator. Additionally, the infrastructure is only ment for small development and poc projects, as no special security measures have been taken.
 
 Note that the deployment file uses values from a file named "secrets.conf", which is represented by a jinja template. The secrets are filled in by the copier command that renders the project template. 
 
