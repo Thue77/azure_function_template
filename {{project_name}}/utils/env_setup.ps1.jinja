@@ -38,15 +38,13 @@ pyenv install $pythonVersion
 Write-Host "INFO::Activate python $pythonVersion with pyenv"
 pyenv global $pythonVersion
 Write-Host 'INFO::Update pip and create virtual environment'
-mkdir $folderName
-Copy-Item .\pyproject.toml $folderName
-Copy-Item .\execute_func.ps1 $folderName
-Set-Location $folderName
 python -m venv .venv
 .\.venv\Scripts\activate
 python -m pip install --upgrade pip
 Write-Host 'INFO::Install pip-tools'
 pip install pip-tools
+Write-Host 'INFO::Change folder'
+Set-Location src
 Write-Host 'INFO::Compile requirements.txt'
 pip-compile --generate-hashes --output-file=requirements.txt --resolver=backtracking pyproject.toml
 Write-Host 'INFO::Compile dev-requirements.txt'
@@ -56,11 +54,11 @@ pip-sync dev-requirements.txt
 Write-Host 'INFO::Initialize project for Azure function'
 if ($template) {
     Write-Host 'INFO::Project started based on template' $template
-    func new --name $folderName --worker-runtime python -m V{{pythonProgrammingModel}} --template $template
+    func new --name {{module_name}} --worker-runtime python -m V{{pythonProgrammingModel}} --template $template
 }
 else {
     Write-Host 'INFO::Empty function project is initiated. If you wish to use a template instead then try with HTTP Trigger '
-    func init --name $folderName --worker-runtime python -m V{{pythonProgrammingModel}}
+    func init --name {{module_name}} --worker-runtime python -m V{{pythonProgrammingModel}}
 }
 
 }
