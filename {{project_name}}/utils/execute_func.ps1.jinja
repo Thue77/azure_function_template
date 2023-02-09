@@ -1,3 +1,10 @@
+$scriptpath = $MyInvocation.MyCommand.Path
+$dir = Split-Path $scriptpath
+
+Set-Location $dir
+
+Set-Location ..\src
+
 invoke-expression 'cmd /c start pwsh -Command { azurite --silent --location c:\azurite\{{project_name}} --debug c:\azurite\{{project_name}}\debug.log --blobPort 10000}'
 
 func start

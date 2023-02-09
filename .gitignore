@@ -1,0 +1,2 @@
+# Ensure that possibly secret copier answers are not commtted to git
+.copier-answers*

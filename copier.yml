@@ -7,24 +7,17 @@ module_name:
     type: str
     help: What is your Python module name?
 
-
 shortProjectName:
     type: str
     help: What is your Python project short name?
-
 
 subscription:
     type: str
     help: What is your Azure subscription id?
 
-
 tenantId:
     type: str
     help: What is your Azure tenant id?
-
-resourceGroupName:
-    type: str
-    help: What is your resource group name without location and environment. All resource groups are expected to have naming rg-project-location-environment?
 
 azureADObjectID:
     type: str
@@ -40,5 +33,5 @@ pythonMicroVersion:
 
 pythonProgrammingModel:
     type: str
-    help: What python programming model to use. Choose between 1 and 2. 2 is still in preview?
+    help: Which python programming model to use? Choose between 1 and 2. 2 is still in preview.
 

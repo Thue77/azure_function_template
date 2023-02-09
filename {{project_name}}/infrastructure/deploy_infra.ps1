@@ -24,7 +24,7 @@ Foreach ($i in $(Get-Content secrets.conf)){
 Write-Host 'Logging into Azure using the browser'
 Connect-AzAccount -TenantId $TenantId  -Subscription $Subscription
 
-$ResourceGroupName = $ResourceGroupName + '-' + $shortLoaction + '-' + $environment
+$ResourceGroupName = 'rg-' + $projectName + '-' + $shortLoaction + '-' + $environment
 
 Write-Host "Setting resource group to $ResourceGroupName"
 
