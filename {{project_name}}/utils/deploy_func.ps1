@@ -1,4 +1,4 @@
-param ($shortLoaction, $environment, $folderName)
+param ($shortLoaction, $environment)
 try {
     
 
@@ -18,7 +18,7 @@ Foreach ($i in $(Get-Content secrets.conf)){
 Write-Host 'Logging into Azure using the browser'
 Connect-AzAccount -TenantId $TenantId  -Subscription $Subscription
 
-$ResourceGroupName = $ResourceGroupName + '-' + $shortLoaction + '-' + $environment
+$ResourceGroupName = 'rg-' + $projectName + '-' + $shortLoaction + '-' + $environment
 
 Write-Host "Setting resource group to $ResourceGroupName"
 
@@ -26,9 +26,7 @@ Set-AzDefault -ResourceGroupName $ResourceGroupName
 
 $funcName = 'func-'+$projectName+ '-' + $shortLoaction + '-' + $environment+'-001'
 
-$path = '.\' + $folderName
-
-Set-Location $path
+Set-Location src
 
 func azure functionapp publish $funcName
 

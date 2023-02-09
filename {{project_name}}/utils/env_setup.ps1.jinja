@@ -1,9 +1,6 @@
-param ($folderName, $template)
+param ($template)
 
 try {
-if (-not($folderName)) {
-    throw 'No folder name is given. Please give a foldername'
-}
 
 try {
     func --version
