@@ -33,5 +33,5 @@ pythonMicroVersion:
 
 pythonProgrammingModel:
     type: str
-    help: What python programming model to use. Choose between 1 and 2. 2 is still in preview?
+    help: Which python programming model to use? Choose between 1 and 2. 2 is still in preview.
 
